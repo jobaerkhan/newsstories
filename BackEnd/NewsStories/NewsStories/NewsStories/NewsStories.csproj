@@ -161,6 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="DAL\Entities\Story.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Interfaces\IStoryRepository.cs" />

@@ -17,7 +17,7 @@ namespace NewsStories.DAL
         }
 
         private IStoryRepository _Stories;
-        public IStoryRepository Stories
+        public IStoryRepository Story
         {
             get
             {

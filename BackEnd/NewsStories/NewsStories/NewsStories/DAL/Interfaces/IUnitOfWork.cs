@@ -7,7 +7,7 @@ namespace NewsStories.DAL.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IStoryRepository Stories { get; }
+        IStoryRepository Story { get; }
         int SaveChanges();
     }
 }
