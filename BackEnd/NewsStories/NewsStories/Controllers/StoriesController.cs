@@ -29,6 +29,7 @@ namespace NewsStories.Controllers
             return db.Story.GetAll();
         }
 
+
         // GET: api/Stories/5
         [ResponseType(typeof(Story))]
         public IHttpActionResult GetStory(int id)
