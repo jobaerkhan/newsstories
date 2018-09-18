@@ -1,4 +1,4 @@
 export * from './core.module';
-export * from './services/stories.service';
-export * from './models/story.model';
+export * from './services';
+export * from './models';
 export * from './interceptors';
