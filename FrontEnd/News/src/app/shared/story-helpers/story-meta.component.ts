@@ -8,4 +8,5 @@ import { Story } from '../../core';
 })
 export class StoryMetaComponent {
   @Input() story: Story;
+
 }

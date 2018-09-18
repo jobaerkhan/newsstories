@@ -23,37 +23,37 @@ namespace NewsStories.Controllers
             db = new UnitOfWork();
         }
 
-        // GET: api/Stories
-        public IEnumerable<Story> GetStory()
-        {
-            return db.Story.GetAll();
-        }
-
-
-        // GET: api/Stories
-        //public IHttpActionResult GetStory()
+        //// GET: api/Stories
+        //public IEnumerable<Story> GetStory()
         //{
-        //    var story = db.Story.GetAll();
-        //    if (story == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(story);
+        //    return db.Story.GetAll();
         //}
+
+
+        //GET: api/Stories
+        public IHttpActionResult GetStory()
+        {
+            var data = db.Story.GetAll();
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { stories = data });
+        }
 
 
         // GET: api/Stories/5
         [ResponseType(typeof(Story))]
         public IHttpActionResult GetStory(int id)
         {
-            Story story = db.Story.GetByID(id);
-            if (story == null)
+            Story data = db.Story.GetByID(id);
+            if (data == null)
             {
                 return NotFound();
             }
 
-            return Ok(story);
+            return Ok(new { story = data });
         }
 
         // PUT: api/Stories/5

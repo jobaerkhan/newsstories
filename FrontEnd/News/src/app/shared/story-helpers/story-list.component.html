@@ -4,11 +4,6 @@
 </app-story-preview>
 
 <div class="app-article-preview"
-  [hidden]="!loading">
-  Loading stories...
-</div>
-
-<div class="app-article-preview"
-  [hidden]="loading || results.length">
+  [hidden]="results?.length">
   No stories are here... yet.
 </div>

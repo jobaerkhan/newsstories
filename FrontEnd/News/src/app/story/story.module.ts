@@ -19,4 +19,4 @@ import { StoryRoutingModule } from './story-routing.module';
     StoryResolver
   ]
 })
-export class ArticleModule {}
+export class StoryModule {}
