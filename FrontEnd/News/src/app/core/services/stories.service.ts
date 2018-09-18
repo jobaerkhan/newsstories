@@ -15,31 +15,27 @@ export class StoriesService {
     return this.apiService
     .get('/stories');
   }
-
+  
   getStories() : Observable<{stories: Story[]}> {
-    return this.apiService
-    .get('/stories');
+    return this.apiService.get('/stories');
   }
 
   get(id): Observable<Story> {
     return this.apiService.get('/stories/' + id)
-      .pipe(map(data => data.article));
+      .pipe(map(data => data.story));
   }
 
   delete(id) {
     return this.apiService.delete('/stories/' + id);
   }
 
-  save(article): Observable<Story> {
-    // If we're updating an existing article
-    if (article.id) {
-      return this.apiService.put('/stories/' + article.id, {article: article})
-        .pipe(map(data => data.article));
-
-    // Otherwise, create a new article
+  save(story): Observable<Story> {
+    if (story.id) {
+      return this.apiService.put('/stories/' + story.id, {story: story})
+        .pipe(map(data => data.story));
     } else {
-      return this.apiService.post('/articles/', {article: article})
-        .pipe(map(data => data.article));
+      return this.apiService.post('/stories/', {story: story})
+        .pipe(map(data => data.story));
     }
   }
 }

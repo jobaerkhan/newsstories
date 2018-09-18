@@ -30,6 +30,19 @@ namespace NewsStories.Controllers
         }
 
 
+        // GET: api/Stories
+        //public IHttpActionResult GetStory()
+        //{
+        //    var story = db.Story.GetAll();
+        //    if (story == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(story);
+        //}
+
+
         // GET: api/Stories/5
         [ResponseType(typeof(Story))]
         public IHttpActionResult GetStory(int id)

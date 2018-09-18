@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {  StoriesService } from './services/stories.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import {
+  ApiService,
+  StoriesService
+} from './services';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   providers: [
+    ApiService,
     StoriesService
   ],
   declarations: []

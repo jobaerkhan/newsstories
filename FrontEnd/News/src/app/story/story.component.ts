@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import {
+  Story,
+  StoriesService
+} from '../core';
 
 @Component({
-  selector: 'app-story',
-  templateUrl: './story.component.html',
-  styleUrls: ['./story.component.css']
+  selector: 'app-story-page',
+  templateUrl: './story.component.html'
 })
 export class StoryComponent implements OnInit {
+  story: Story;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.route.data.subscribe(
+      (data: { story: Story }) => {
+        this.story = data.story;
+      }
+    );
   }
-
 }

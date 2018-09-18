@@ -1,33 +1,26 @@
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CoreModule } from './core/core.module';
-
-import {
-  FooterComponent,
-  HeaderComponent
-} from './shared/layout';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { StoryComponent } from './story/story.component';
+import { HomeModule } from './home/home.module';
+import {
+  FooterComponent,
+  HeaderComponent,
+  SharedModule
+} from './shared';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    StoryComponent,
-    FooterComponent, HeaderComponent
-  ],
+  declarations: [AppComponent, FooterComponent, HeaderComponent],
   imports: [
     BrowserModule,
     CoreModule,
-    HttpModule,
-    FormsModule,
-    ReactiveFormsModule
+    SharedModule,
+    AppRoutingModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
