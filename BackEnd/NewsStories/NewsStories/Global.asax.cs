@@ -1,4 +1,7 @@
-﻿using System;
+﻿using NewsStories.DAL.Entities;
+using NewsStories.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
@@ -20,7 +23,15 @@ namespace NewsStories
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
+            AutoMapper.Mapper.Initialize(mapper =>
+            {
+                mapper.CreateMap<Story, Storydto>().ReverseMap();
+            });
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(
+             new QueryStringMapping("type", "json", new MediaTypeHeaderValue("application/json")));
+
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.MediaTypeMappings.Add(
+                new QueryStringMapping("type", "xml", new MediaTypeHeaderValue("application/xml")));
         }
     }
 }

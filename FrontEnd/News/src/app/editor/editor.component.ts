@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr'
 
 import { Story, StoriesService } from '../core';
 
@@ -11,24 +12,23 @@ import { Story, StoriesService } from '../core';
 export class EditorComponent implements OnInit {
   story: Story = {} as Story;
   storyForm: FormGroup;
-  errors: Object = {};
-  isSubmitting = false;
 
   constructor(
     private storiesService: StoriesService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {
 
     this.storyForm = this.fb.group({
-      title: '',
-      body: '',
-      publishedDate:''
+      title: ['', Validators.required],
+      body: ['', Validators.required]
     });
   }
 
   ngOnInit() {
+    
     this.route.data.subscribe((data: { story: Story }) => {
       if (data.story) {
         this.story = data.story;
@@ -38,17 +38,19 @@ export class EditorComponent implements OnInit {
   }
 
     submitForm() {
-    this.isSubmitting = true;
-
     // update the model
     this.updateStory(this.storyForm.value);
-
     // post the changes
     this.storiesService.save(this.story).subscribe(
-      story => this.router.navigateByUrl('/story/' + story.id),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
+      success => {
+        if(success)
+        {
+        this.toastr.success('Story saved successful');
+        this.router.navigateByUrl('/');
+        }
+        else{
+          console.log('failed');
+        }
       }
     );
   }

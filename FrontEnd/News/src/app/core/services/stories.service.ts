@@ -29,13 +29,13 @@ export class StoriesService {
     return this.apiService.delete('/stories/' + id);
   }
 
-  save(story): Observable<Story> {
+  save(story): Observable<any> {
     if (story.id) {
       return this.apiService.put('/stories/' + story.id, {story: story})
-        .pipe(map(data => data.story));
+      .pipe(map(data => data.success));
     } else {
-      return this.apiService.post('/stories/', {story: story})
-        .pipe(map(data => data.story));
+      return this.apiService.post('/stories/', story)
+      .pipe(map(data => data.success));
     }
   }
 }

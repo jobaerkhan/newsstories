@@ -5,7 +5,7 @@ using System.Web;
 
 namespace NewsStories.Models
 {
-    public class StoryViewModel
+    public class Storydto
     {
         public int Id { get; set; }
         public string Title { get; set; }

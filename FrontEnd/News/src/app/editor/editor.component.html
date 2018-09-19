@@ -4,15 +4,20 @@
         <div class="col-md-10 offset-md-1 col-xs-12">
   
           <form [formGroup]="storyForm">
-            <fieldset [disabled]="isSubmitting">
-  
+            <fieldset>
+              <span style='color: red' *ngIf="storyForm.get('title').hasError('required') && storyForm.get('title').touched">
+                    Please enter a story title
+              </span> 
               <fieldset class="form-group">
                 <input class="form-control form-control-lg"
                   formControlName="title"
                   type="text"
-                  placeholder="Story Title" />
+                  placeholder="Story Title"
+                  required  />
               </fieldset>
-  
+              <span style='color: red' *ngIf="storyForm.get('body').hasError('required') && storyForm.get('body').touched">
+                  Please write your story
+            </span> 
               <fieldset class="form-group">
                 <textarea class="form-control"
                   formControlName="body"
@@ -20,21 +25,11 @@
                   placeholder="Write your story">
                 </textarea>
               </fieldset>
-
-              <fieldset class="form-group">
-                  <input class="form-control form-control-sm"
-                    formControlName="publishedDate"
-                    type="date"
-                    placeholder="Story Title" />
-                </fieldset>
-   
-              <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+              <button [disabled]="storyForm.invalid" class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
                 Publish Story
               </button>
-  
             </fieldset>
           </form>
-  
         </div>
       </div>
     </div>

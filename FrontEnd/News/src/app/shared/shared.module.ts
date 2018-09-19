@@ -6,8 +6,6 @@ import { RouterModule } from '@angular/router';
 
 import { StoryListComponent, StoryMetaComponent, StoryPreviewComponent } from './story-helpers';
 import { ListErrorsComponent } from './list-errors.component';
-//import { ListErrorsComponent } from './list-errors.component';
-
 
 @NgModule({
   imports: [

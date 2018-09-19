@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -11,6 +12,7 @@ using System.Web.Http.Description;
 using NewsStories.DAL;
 using NewsStories.DAL.Entities;
 using NewsStories.DAL.Interfaces;
+using NewsStories.Models;
 
 namespace NewsStories.Controllers
 {
@@ -23,12 +25,6 @@ namespace NewsStories.Controllers
             db = new UnitOfWork();
         }
 
-        //// GET: api/Stories
-        //public IEnumerable<Story> GetStory()
-        //{
-        //    return db.Story.GetAll();
-        //}
-
 
         //GET: api/Stories
         public IHttpActionResult GetStory()
@@ -38,7 +34,6 @@ namespace NewsStories.Controllers
             {
                 return NotFound();
             }
-
             return Ok(new { stories = data });
         }
 
@@ -90,18 +85,31 @@ namespace NewsStories.Controllers
         }
 
         // POST: api/Stories
-        [ResponseType(typeof(Story))]
-        public IHttpActionResult PostStory(Story story)
+        public IHttpActionResult PostStory([FromBody]Storydto story)
         {
+            if (story == null)
+            {
+                return BadRequest();
+            }
+
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Story.Add(story);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = story.Id }, story);
+            try
+            {
+                Story addStory = Mapper.Map<Story>(story);
+                addStory.PublishedDate = DateTime.Now;
+                db.Story.Add(addStory);
+                db.SaveChanges();
+                return Ok(new { success = true}); ;
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { success = false}); ;
+            }
         }
 
         // DELETE: api/Stories/5
