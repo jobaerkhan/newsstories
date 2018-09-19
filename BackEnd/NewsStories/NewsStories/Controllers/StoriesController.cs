@@ -25,7 +25,6 @@ namespace NewsStories.Controllers
             db = new UnitOfWork();
         }
 
-
         //GET: api/Stories
         public IHttpActionResult GetStory()
         {

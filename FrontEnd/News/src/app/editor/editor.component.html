@@ -6,13 +6,13 @@
           <form [formGroup]="storyForm">
             <fieldset>
               <span style='color: red' *ngIf="storyForm.get('title').hasError('required') && storyForm.get('title').touched">
-                    Please enter a story title
+                    Please enter title for your story
               </span> 
               <fieldset class="form-group">
                 <input class="form-control form-control-lg"
                   formControlName="title"
                   type="text"
-                  placeholder="Story Title"
+                  placeholder="Enter the title of your story"
                   required  />
               </fieldset>
               <span style='color: red' *ngIf="storyForm.get('body').hasError('required') && storyForm.get('body').touched">
@@ -22,7 +22,7 @@
                 <textarea class="form-control"
                   formControlName="body"
                   rows="8"
-                  placeholder="Write your story">
+                  placeholder="Enter the body of your story">
                 </textarea>
               </fieldset>
               <button [disabled]="storyForm.invalid" class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
