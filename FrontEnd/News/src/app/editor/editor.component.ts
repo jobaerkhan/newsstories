@@ -23,12 +23,12 @@ export class EditorComponent implements OnInit {
 
     this.storyForm = this.fb.group({
       title: ['', Validators.required],
-      body: ['', Validators.required]
+      body: ['', Validators.required],
+      id: 0
     });
   }
 
   ngOnInit() {
-    
     this.route.data.subscribe((data: { story: Story }) => {
       if (data.story) {
         this.story = data.story;

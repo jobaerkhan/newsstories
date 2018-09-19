@@ -51,8 +51,7 @@ namespace NewsStories.Controllers
         }
 
         // PUT: api/Stories/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutStory(int id, Story story)
+        public IHttpActionResult PutStory(int id, [FromBody]Storydto story)
         {
             if (!ModelState.IsValid)
             {
@@ -66,21 +65,16 @@ namespace NewsStories.Controllers
 
             try
             {
+                Story updatedStory = Mapper.Map<Story>(story);
+                updatedStory.PublishedDate = DateTime.Now;
+                db.Story.Update(updatedStory);
                 db.SaveChanges();
+                return Ok(new { success = true });
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!db.Story.StoryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return Ok(new { success = false }); ;
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Stories
@@ -103,7 +97,7 @@ namespace NewsStories.Controllers
                 addStory.PublishedDate = DateTime.Now;
                 db.Story.Add(addStory);
                 db.SaveChanges();
-                return Ok(new { success = true}); ;
+                return Ok(new { success = true});
             }
             catch (Exception ex)
             {

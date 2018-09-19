@@ -20,7 +20,7 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
-  put(path: string, body: Object = {}): Observable<any> {
+  put(path: string, body: any): Observable<any> {
     return this.http.put(
       `${environment.api_url}${path}`,
       JSON.stringify(body)

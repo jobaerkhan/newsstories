@@ -30,8 +30,8 @@ export class StoriesService {
   }
 
   save(story): Observable<any> {
-    if (story.id) {
-      return this.apiService.put('/stories/' + story.id, {story: story})
+    if (story.id > 0) {
+      return this.apiService.put('/stories/' + story.id, story)
       .pipe(map(data => data.success));
     } else {
       return this.apiService.post('/stories/', story)

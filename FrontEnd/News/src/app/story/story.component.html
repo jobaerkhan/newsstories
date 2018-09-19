@@ -1,18 +1,22 @@
 <div class="article-page">
 
-    <div class="banner">
-      <div class="container">
-        <h1>{{ story.title }}</h1>
-        <app-story-meta [story]="story">
-        </app-story-meta>
-      </div>
+  <div class="banner">
+    <div class="container">
+      <h1>{{ story.title }}</h1>
+      <app-story-meta [story]="story">
+        <span>
+          <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', story.id]">
+            <i class="ion-edit"></i> Edit Story
+          </a>
+        </span>
+      </app-story-meta>
     </div>
-    <div class="container page">
-      <div class="row article-content">
-        <div class="col-md-12">
-          <div [innerHTML]="story.body"></div>
-        </div>
+  </div>
+  <div class="container page">
+    <div class="row article-content">
+      <div class="col-md-12">
+        <div [innerHTML]="story.body"></div>
       </div>
     </div>
   </div>
-  
+</div>
