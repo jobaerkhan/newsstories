@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr'
 
 import {
   Story,
@@ -15,7 +16,10 @@ export class StoryComponent implements OnInit {
   story: Story;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storyService: StoriesService,
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -24,5 +28,21 @@ export class StoryComponent implements OnInit {
         this.story = data.story;
       }
     );
+  }
+
+  deleteStory() {
+
+    this.storyService.delete(this.story.id)
+      .subscribe(
+        success => {
+          if (success) {
+            this.toastr.success('Story deleted successfully');
+            this.router.navigateByUrl('/');
+          }
+          else {
+            this.toastr.error('Failed to delete story');
+          }
+        }
+      );
   }
 }

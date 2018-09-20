@@ -45,11 +45,11 @@ export class EditorComponent implements OnInit {
       success => {
         if(success)
         {
-        this.toastr.success('Story saved successful');
+        this.toastr.success('Story saved successfully');
         this.router.navigateByUrl('/');
         }
         else{
-          console.log('failed');
+          this.toastr.error('Failed to save story');
         }
       }
     );

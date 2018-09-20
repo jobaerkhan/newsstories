@@ -13,6 +13,7 @@ using NewsStories.DAL;
 using NewsStories.DAL.Entities;
 using NewsStories.DAL.Interfaces;
 using NewsStories.Models;
+using System.Data.Entity.Validation;
 
 namespace NewsStories.Controllers
 {
@@ -71,9 +72,10 @@ namespace NewsStories.Controllers
                 db.SaveChanges();
                 return Ok(new { success = true });
             }
+
             catch (Exception ex)
             {
-                return Ok(new { success = false }); ;
+                return Ok(new { success = false });
             }
         }
 
@@ -114,11 +116,17 @@ namespace NewsStories.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                db.Story.Remove(story);
+                db.SaveChanges();
 
-            db.Story.Remove(story);
-            db.SaveChanges();
-
-            return Ok(story);
+                return Ok(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { success = false }); ;
+            }
         }
     }
 }

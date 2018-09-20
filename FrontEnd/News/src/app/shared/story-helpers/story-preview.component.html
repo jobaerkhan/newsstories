@@ -4,7 +4,7 @@
       
         <a [routerLink]="['/story', story.id]" class="preview-link">
           <h1>{{ story.title }}</h1>
-          <p>{{ story.body }}</p>
+          <p>{{ story.body | slice:0:250}}</p>
           <span>Read more...</span>
         </a>
       </div>

@@ -4,11 +4,13 @@
     <div class="container">
       <h1>{{ story.title }}</h1>
       <app-story-meta [story]="story">
-        <span>
-          <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', story.id]">
-            <i class="ion-edit"></i> Edit Story
-          </a>
-        </span>
+        <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', story.id]">
+          <i class="ion-edit"></i> Edit Story
+        </a>
+
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteStory()">
+          <i class="ion-trash-a"></i> Delete Story
+        </button>
       </app-story-meta>
     </div>
   </div>
