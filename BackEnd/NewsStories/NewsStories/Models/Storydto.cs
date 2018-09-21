@@ -13,18 +13,19 @@ namespace NewsStories.Models
         public string Title { get; set; }
         public string Body { get; set; }
         public DateTime PublishedDate { get; set; }
-        public Userdto User { get; set; }
+        public int UserId { get; set; }
+        public String UserName { get; set; }
 
-        public Storydto(Story story)
-        {
-            Id = story.Id;
-            Title = story.Title;
-            Body = story.Body;
-            PublishedDate = story.PublishedDate;
-            if (story.User != null)
-            {
-                User = new Userdto(story.User);
-            }
-        }
+        //public Storydto(Story story)
+        //{
+        //    Id = story.Id;
+        //    Title = story.Title;
+        //    Body = story.Body;
+        //    PublishedDate = story.PublishedDate;
+        //    if (story.User != null)
+        //    {
+        //        User = new Userdto(story.User);
+        //    }
+        //}
     }
 }

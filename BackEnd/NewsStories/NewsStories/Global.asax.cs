@@ -23,10 +23,12 @@ namespace NewsStories
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
             AutoMapper.Mapper.Initialize(mapper =>
             {
                 mapper.CreateMap<Story, Storydto>().ReverseMap();
             });
+
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(
              new QueryStringMapping("type", "json", new MediaTypeHeaderValue("application/json")));
 

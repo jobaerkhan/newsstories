@@ -34,9 +34,22 @@ namespace NewsStories.Controllers
             {
                 return NotFound();
             }
-            return Ok(new { stories = data.Select(d => new Storydto(d)) });
+
+             var stories = from s in data
+                           select new Storydto()
+                    {
+                        Id = s.Id,
+                        Title = s.Title,
+                        Body = s.Body,
+                        PublishedDate = s.PublishedDate,
+                        UserId = s.User.UserId,
+                        UserName = s.User.UserName
+                    };
+
+            return Ok(new { stories = stories });
         }
 
+        //For xml or json data
         [Route("api/GetStories")]
         [HttpGet]
         public IEnumerable<Story> GetStories()

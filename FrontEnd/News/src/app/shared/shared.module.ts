@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { StoryListComponent, StoryMetaComponent, StoryPreviewComponent } from './story-helpers';
 import { ListErrorsComponent } from './list-errors.component';
+import { ShowAuthedDirective } from './show-authed.directive';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ListErrorsComponent } from './list-errors.component';
     StoryListComponent,
     StoryMetaComponent,
     StoryPreviewComponent,
-    ListErrorsComponent
+    ListErrorsComponent,
+    ShowAuthedDirective
   ],
   exports: [
     StoryListComponent,

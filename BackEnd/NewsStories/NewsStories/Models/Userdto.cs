@@ -3,12 +3,12 @@
     public class Userdto
     {
         public int Id { get; set; }
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         public Userdto(User user)
         {
             Id = user.UserId;
-            Username = user.UserName;
+            UserName = user.UserName;
         }
     }
 }
