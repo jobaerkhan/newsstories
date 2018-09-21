@@ -202,7 +202,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
-    <Compile Include="Controllers\StoryforthirdpartyController.cs" />
     <Compile Include="DAL\Entities\Story.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Interfaces\IStoryRepository.cs" />

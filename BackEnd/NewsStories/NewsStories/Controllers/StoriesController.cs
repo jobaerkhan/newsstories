@@ -37,6 +37,14 @@ namespace NewsStories.Controllers
             return Ok(new { stories = data });
         }
 
+        [Route("api/GetStories")]
+        [HttpGet]
+        public IEnumerable<Story> GetStories()
+        {
+            var data = db.Story.GetAll();
+            return data;
+        }
+
 
         // GET: api/Stories/5
         [ResponseType(typeof(Story))]

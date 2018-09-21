@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import * as xml2js from 'xml2js';
+
 import { ApiService } from './api.service';
 import { Story } from '../models/story.model';
 import { map } from 'rxjs/operators';
@@ -18,6 +20,11 @@ export class StoriesService {
   
   getStories() : Observable<{stories: Story[]}> {
     return this.apiService.get('/stories');
+  }
+
+  //To get xml format data
+  getxmlStories() : Observable<any> {
+    return this.apiService.get('/getstories?type=xml');
   }
 
   get(id): Observable<Story> {
