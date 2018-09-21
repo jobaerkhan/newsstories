@@ -34,7 +34,7 @@ namespace NewsStories.Controllers
             {
                 return NotFound();
             }
-            return Ok(new { stories = data });
+            return Ok(new { stories = data.Select(d => new Storydto(d)) });
         }
 
         [Route("api/GetStories")]
@@ -107,11 +107,11 @@ namespace NewsStories.Controllers
                 addStory.PublishedDate = DateTime.Now;
                 db.Story.Add(addStory);
                 db.SaveChanges();
-                return Ok(new { success = true});
+                return Ok(new { success = true });
             }
             catch (Exception ex)
             {
-                return Ok(new { success = false}); ;
+                return Ok(new { success = false }); ;
             }
         }
 

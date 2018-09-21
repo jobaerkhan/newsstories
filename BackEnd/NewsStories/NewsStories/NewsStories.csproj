@@ -231,6 +231,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\Storydto.cs" />
+    <Compile Include="Models\Userdto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

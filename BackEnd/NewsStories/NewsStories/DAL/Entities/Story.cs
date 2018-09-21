@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,6 +14,7 @@ namespace NewsStories.DAL.Entities
         public DateTime PublishedDate { get; set; }
         public int UserId { get; set; }
 
+        [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
     }

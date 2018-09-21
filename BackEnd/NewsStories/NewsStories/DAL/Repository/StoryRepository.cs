@@ -27,5 +27,10 @@ namespace NewsStories.DAL.Repository
         {
             return context.Story.Count(e => e.Id == id) > 0;
         }
+
+        public override IEnumerable<Story> GetAll()
+        {
+            return db.Set<Story>().Include("User").ToList();
+        }
     }
 }

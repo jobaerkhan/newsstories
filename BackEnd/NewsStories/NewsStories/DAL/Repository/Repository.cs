@@ -17,7 +17,7 @@ namespace NewsStories.DAL.Repository
             db = _db;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return db.Set<TEntity>().ToList();
         }
