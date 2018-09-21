@@ -19,6 +19,7 @@ namespace NewsStories.DAL
         }
 
         public DbSet<Story> Story { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -13,21 +13,6 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     };
 
     const request = req.clone({ setHeaders: headersConfig });
-    return next.handle(request).pipe(
-        tap(
-          event => {
-            //logging the http response to browser's console in case of a success
-            if (event instanceof HttpResponse) {
-              console.log("api call success :", event);
-            }
-          },
-          error => {
-            //logging the http response to browser's console in case of a failuer
-            if (event instanceof HttpResponse) {
-              console.log("api call error :", event);
-            }
-          }
-        )
-      );
+    return next.handle(request);
   }
 }

@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared';
-import { HomeRoutingModule } from './home.routing.module';
+import { HomeRoutingModule } from './home-routing.module';
+import { HomeAuthResolver } from './home-auth-resolver.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { HomeRoutingModule } from './home.routing.module';
     HomeComponent
   ],
   providers: [
+    HomeAuthResolver
   ]
 })
 export class HomeModule {}

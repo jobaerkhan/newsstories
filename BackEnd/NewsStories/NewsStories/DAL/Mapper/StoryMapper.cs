@@ -8,7 +8,7 @@ using System.Web;
 
 namespace NewsStories.DAL.Mapper
 {
-    public class StoryMapper : EntityTypeConfiguration<Story>
+    public partial class StoryMapper : EntityTypeConfiguration<Story>
     {
         public StoryMapper()
         {
@@ -26,6 +26,7 @@ namespace NewsStories.DAL.Mapper
 
             this.Property(c => c.PublishedDate).IsRequired();
 
+            this.HasRequired(t => t.User).WithMany().HasForeignKey(t => t.UserId);
         }
     }
 }

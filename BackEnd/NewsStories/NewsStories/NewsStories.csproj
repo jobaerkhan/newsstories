@@ -203,10 +203,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="DAL\Entities\Story.cs" />
+    <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Interfaces\IStoryRepository.cs" />
     <Compile Include="DAL\Interfaces\IUnitOfWork.cs" />
     <Compile Include="DAL\Mapper\StoryMapper.cs" />
+    <Compile Include="DAL\Mapper\UserMapper.cs" />
     <Compile Include="DAL\NewsContext.cs" />
     <Compile Include="DAL\Repository\Repository.cs" />
     <Compile Include="DAL\Repository\StoryRepository.cs" />
@@ -217,6 +219,14 @@
     <Compile Include="Migrations\201809161911419_Initial.cs" />
     <Compile Include="Migrations\201809161911419_Initial.Designer.cs">
       <DependentUpon>201809161911419_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809211348355_userTableAdded.cs" />
+    <Compile Include="Migrations\201809211348355_userTableAdded.Designer.cs">
+      <DependentUpon>201809211348355_userTableAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809211424039_userForeignKey.cs" />
+    <Compile Include="Migrations\201809211424039_userForeignKey.Designer.cs">
+      <DependentUpon>201809211424039_userForeignKey.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PostViewModel.cs" />
@@ -312,6 +322,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809161911419_Initial.resx">
       <DependentUpon>201809161911419_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809211348355_userTableAdded.resx">
+      <DependentUpon>201809211348355_userTableAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809211424039_userForeignKey.resx">
+      <DependentUpon>201809211424039_userForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
