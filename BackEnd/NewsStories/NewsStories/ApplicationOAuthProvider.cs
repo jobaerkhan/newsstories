@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.OAuth;
 using NewsStories.DAL;
 
@@ -12,25 +14,24 @@ namespace NewsStories
     {
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            await Task.FromResult(context.Validated());
+            context.Validated();
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            var newsDbContext = new NewsDbContext();
-            var user = await newsDbContext.User.FirstOrDefaultAsync(
-                u => u.UserName == context.UserName && u.Password == context.Password);
+            var userStore = new UserStore<User>(new NewsDbContext());
+            var manager = new UserManager<User>(userStore);
+            var user = await manager.FindAsync(context.UserName, context.Password);
             if (user != null)
             {
-                context.Validated(new ClaimsIdentity(new List<Claim>
-                {new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                    new Claim(ClaimTypes.Name, user.UserName)}, DefaultAuthenticationTypes.ExternalBearer));
+                var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+                identity.AddClaim(new Claim("Username", user.UserName));
+                identity.AddClaim(new Claim("Email", user.Email));
+                identity.AddClaim(new Claim("FullName", user.FullName));
+                context.Validated(identity);
             }
             else
-            {
-                context.SetError("401", "unauthorized");
-            }
+                return;
         }
     }
 }

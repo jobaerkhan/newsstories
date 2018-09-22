@@ -12,7 +12,7 @@ namespace NewsStories.DAL.Entities
         public string Title { get; set; }
         public string Body { get; set; }
         public DateTime PublishedDate { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }

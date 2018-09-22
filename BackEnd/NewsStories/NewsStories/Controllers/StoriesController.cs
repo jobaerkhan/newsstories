@@ -27,6 +27,7 @@ namespace NewsStories.Controllers
         }
 
         //GET: api/Stories
+        [AllowAnonymous]
         public IHttpActionResult GetStory()
         {
             var data = db.Story.GetAll();
@@ -42,7 +43,7 @@ namespace NewsStories.Controllers
                         Title = s.Title,
                         Body = s.Body,
                         PublishedDate = s.PublishedDate,
-                        UserId = s.User.UserId,
+                        UserId = s.User.Id,
                         UserName = s.User.UserName
                     };
 

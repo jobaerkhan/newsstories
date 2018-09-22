@@ -55,7 +55,10 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -230,42 +233,33 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\Entities\Story.cs" />
     <Compile Include="DAL\Entities\User.cs" />
     <Compile Include="DAL\Interfaces\IRepository.cs" />
     <Compile Include="DAL\Interfaces\IStoryRepository.cs" />
     <Compile Include="DAL\Interfaces\IUnitOfWork.cs" />
     <Compile Include="DAL\Mapper\StoryMapper.cs" />
-    <Compile Include="DAL\Mapper\UserMapper.cs" />
     <Compile Include="DAL\NewsContext.cs" />
     <Compile Include="DAL\Repository\Repository.cs" />
     <Compile Include="DAL\Repository\StoryRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201809161911419_Initial.cs" />
     <Compile Include="Migrations\201809161911419_Initial.Designer.cs">
       <DependentUpon>201809161911419_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809211348355_userTableAdded.cs" />
-    <Compile Include="Migrations\201809211348355_userTableAdded.Designer.cs">
-      <DependentUpon>201809211348355_userTableAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809211424039_userForeignKey.cs" />
-    <Compile Include="Migrations\201809211424039_userForeignKey.Designer.cs">
-      <DependentUpon>201809211424039_userForeignKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809220902370_undoUseRemove.cs" />
-    <Compile Include="Migrations\201809220902370_undoUseRemove.Designer.cs">
-      <DependentUpon>201809220902370_undoUseRemove.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809220906072_addForeignKey.cs" />
-    <Compile Include="Migrations\201809220906072_addForeignKey.Designer.cs">
-      <DependentUpon>201809220906072_addForeignKey.cs</DependentUpon>
+    <Compile Include="Migrations\201809222024164_userIdentityAdded.cs" />
+    <Compile Include="Migrations\201809222024164_userIdentityAdded.Designer.cs">
+      <DependentUpon>201809222024164_userIdentityAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\Storydto.cs" />
-    <Compile Include="Models\Userdto.cs" />
-    <Compile Include="OwinStartup.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +270,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -358,17 +353,8 @@
     <EmbeddedResource Include="Migrations\201809161911419_Initial.resx">
       <DependentUpon>201809161911419_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809211348355_userTableAdded.resx">
-      <DependentUpon>201809211348355_userTableAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809211424039_userForeignKey.resx">
-      <DependentUpon>201809211424039_userForeignKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809220902370_undoUseRemove.resx">
-      <DependentUpon>201809220902370_undoUseRemove.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809220906072_addForeignKey.resx">
-      <DependentUpon>201809220906072_addForeignKey.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809222024164_userIdentityAdded.resx">
+      <DependentUpon>201809222024164_userIdentityAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,17 +12,17 @@ namespace NewsStories.DAL.Mapper
     {
         public StoryMapper()
         {
-            this.ToTable("Post");
+            this.ToTable("Story");
 
             this.HasKey(c => c.Id);
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).IsRequired();
 
             this.Property(c => c.Title).IsRequired();
-            this.Property(c => c.Title).HasMaxLength(255);
+            this.Property(c => c.Title).HasMaxLength(200);
 
             this.Property(c => c.Body).IsRequired();
-            this.Property(c => c.Body).HasMaxLength(1000);
+            this.Property(c => c.Body).HasMaxLength(2000);
 
             this.Property(c => c.PublishedDate).IsRequired();
 

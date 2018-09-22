@@ -7,13 +7,13 @@ namespace NewsStories.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class userForeignKey : IMigrationMetadata
+    public sealed partial class userIdentityAdded : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(userForeignKey));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(userIdentityAdded));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809211424039_userForeignKey"; }
+            get { return "201809222024164_userIdentityAdded"; }
         }
         
         string IMigrationMetadata.Source
