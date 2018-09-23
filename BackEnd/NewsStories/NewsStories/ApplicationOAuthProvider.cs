@@ -28,6 +28,7 @@ namespace NewsStories
                 identity.AddClaim(new Claim("Username", user.UserName));
                 identity.AddClaim(new Claim("Email", user.Email));
                 identity.AddClaim(new Claim("FullName", user.FullName));
+                identity.AddClaim(new Claim("UserId", user.Id));
                 context.Validated(identity);
             }
             else

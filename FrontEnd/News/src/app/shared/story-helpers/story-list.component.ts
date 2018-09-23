@@ -16,7 +16,7 @@ export class StoryListComponent implements OnInit{
     this.storiesService.getStories()
     .subscribe(data => {
       this.results = data.stories;
-      console.log(this.results.length);
+      console.log(this.results);
     });
   }
 }

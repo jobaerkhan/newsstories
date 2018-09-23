@@ -7,7 +7,7 @@ import {
   ApiService,
   StoriesService,
   AuthGuard,
-  JwtService,
+  TokenService,
   UserService
 } from './services';
 
@@ -20,7 +20,7 @@ import {
     ApiService,
     StoriesService,
     AuthGuard,
-    JwtService,
+    TokenService,
     UserService
   ],
   declarations: []

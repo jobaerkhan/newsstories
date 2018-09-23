@@ -31,7 +31,8 @@ import { ShowAuthedDirective } from './show-authed.directive';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    ShowAuthedDirective
   ]
 })
 export class SharedModule {}

@@ -5,5 +5,6 @@ export interface Story {
   title: string;
   body: string;
   publishedDate: Date;
-  user: User;
+  userName: string;
+  userId: number;
 }

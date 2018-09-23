@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr'
 import { Errors, UserService } from '../core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { TokenService } from '../core';
 
 @Component({
   selector: 'app-auth-page',
@@ -11,19 +13,22 @@ import { Errors, UserService } from '../core';
 export class AuthComponent implements OnInit {
   authType: String = '';
   title: String = '';
-  errors: Errors = {errors: {}};
+  errors: Errors = { errors: {} };
   isSubmitting = false;
   authForm: FormGroup;
+  isLoginError : boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private tokenService: TokenService
   ) {
     // use FormBuilder to create a form group
     this.authForm = this.fb.group({
-      'email': ['', Validators.required],
+      'username': ['', Validators.required],
       'password': ['', Validators.required]
     });
   }
@@ -36,24 +41,39 @@ export class AuthComponent implements OnInit {
       this.title = (this.authType === 'login') ? 'Sign in' : 'Sign up';
       // add form control for username if this is the register page
       if (this.authType === 'register') {
-        this.authForm.addControl('username', new FormControl());
+        this.authForm.addControl('email', new FormControl());
+        this.authForm.addControl('fullname', new FormControl());
       }
     });
   }
 
   submitForm() {
     this.isSubmitting = true;
-    this.errors = {errors: {}};
+    this.errors = { errors: {} };
 
     const credentials = this.authForm.value;
-    this.userService
-    .attemptAuth(this.authType, credentials)
-    .subscribe(
-      data => this.router.navigateByUrl('/'),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
-      }
-    );
+    if (this.authType === 'register') {
+      this.userService
+        .registerUser(credentials)
+        .subscribe((data: any) => {
+          if (data.Succeeded == true) {
+            this.router.navigateByUrl('/login'),
+              this.toastr.success('User registration successful');
+          }
+          else
+            this.toastr.error(data.Errors[0]);
+        });
+    }
+    else{
+      this.userService.userAuthentication(credentials.username,credentials.password).subscribe((data : any)=>{
+      this.tokenService.saveToken(data.access_token);
+      console.log("Token:" + this.tokenService.getToken());
+      //this.userService.getUserClaims();
+      this.router.navigateByUrl('/');
+    },
+    (err : HttpErrorResponse)=>{
+      this.isLoginError = true;
+    });
+    }
   }
 }
