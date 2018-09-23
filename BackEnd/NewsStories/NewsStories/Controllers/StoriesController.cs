@@ -14,6 +14,9 @@ using NewsStories.DAL.Entities;
 using NewsStories.DAL.Interfaces;
 using NewsStories.Models;
 using System.Data.Entity.Validation;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NewsStories.Controllers
 {
@@ -44,7 +47,7 @@ namespace NewsStories.Controllers
                         Body = s.Body,
                         PublishedDate = s.PublishedDate,
                         UserId = s.User.Id,
-                        UserName = s.User.UserName
+                        UserFullName = s.User.FullName
                     };
 
             return Ok(new { stories = stories });
@@ -61,16 +64,16 @@ namespace NewsStories.Controllers
 
 
         // GET: api/Stories/5
+        [AllowAnonymous]
         [ResponseType(typeof(Story))]
         public IHttpActionResult GetStory(int id)
         {
-            Story data = db.Story.GetByID(id);
-            if (data == null)
+            Story story = db.Story.GetByID(id);
+            if (story == null)
             {
                 return NotFound();
-            }
-
-            return Ok(new { story = data });
+            } 
+            return Ok(new { story = story });
         }
 
         // PUT: api/Stories/5
@@ -114,11 +117,16 @@ namespace NewsStories.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
             try
             {
+                var identityClaims = (ClaimsIdentity)User.Identity;
+                IEnumerable<Claim> claims = identityClaims.Claims;
                 Story addStory = Mapper.Map<Story>(story);
                 addStory.PublishedDate = DateTime.Now;
+                addStory.UserId = identityClaims.FindFirst("UserId").Value;
+                var user = db.User.GetUser(addStory.UserId);
+                addStory.User = user;
                 db.Story.Add(addStory);
                 db.SaveChanges();
                 return Ok(new { success = true });

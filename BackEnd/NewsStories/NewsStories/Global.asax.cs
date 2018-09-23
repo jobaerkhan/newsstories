@@ -24,12 +24,16 @@ namespace NewsStories
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            AutoMapper.Mapper.Initialize(mapper =>
+            {
+                mapper.CreateMap<Story, Storydto>().ReverseMap();
+            });
 
-            //GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(
-            // new QueryStringMapping("type", "json", new MediaTypeHeaderValue("application/json")));
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(
+             new QueryStringMapping("type", "json", new MediaTypeHeaderValue("application/json")));
 
-            //GlobalConfiguration.Configuration.Formatters.XmlFormatter.MediaTypeMappings.Add(
-            //    new QueryStringMapping("type", "xml", new MediaTypeHeaderValue("application/xml")));
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.MediaTypeMappings.Add(
+                new QueryStringMapping("type", "xml", new MediaTypeHeaderValue("application/xml")));
         }
     }
 }

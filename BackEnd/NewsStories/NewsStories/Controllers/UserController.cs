@@ -22,9 +22,9 @@ namespace NewsStories.Controllers
         {
             var userStore = new UserStore<User>(new NewsDbContext());
             var manager = new UserManager<User>(userStore);
-            var user = new User() { UserName = model.UserName, Email = model.Email };
-            user.FullName = model.FullName;
+            var user = new User() { UserName = model.UserName, Email = model.Email, FullName = model.FullName };
             IdentityResult result = manager.Create(user, model.Password);
+
             return result;
         }
 
@@ -40,8 +40,8 @@ namespace NewsStories.Controllers
                 UserName = identityClaims.FindFirst("Username").Value,
                 Email = identityClaims.FindFirst("Email").Value,
                 FullName = identityClaims.FindFirst("FullName").Value,
-                Token = HttpContext.Current.Request.LogonUserIdentity.Token.ToString()
-        };
+                UserId = identityClaims.FindFirst("UserId").Value,
+            };
             return model;
         }
     }

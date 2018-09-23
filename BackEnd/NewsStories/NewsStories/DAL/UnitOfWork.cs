@@ -29,6 +29,19 @@ namespace NewsStories.DAL
             }
         }
 
+        private IUserRepository _User;
+        public IUserRepository User
+        {
+            get
+            {
+                if (this._User == null)
+                {
+                    this._User = new UserRepository(db);
+                }
+                return this._User;
+            }
+        }
+
         public int SaveChanges()
         {
             return db.SaveChanges();

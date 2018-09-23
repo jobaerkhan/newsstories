@@ -14,7 +14,7 @@ namespace NewsStories.Models
         public string Body { get; set; }
         public DateTime PublishedDate { get; set; }
         public string UserId { get; set; }
-        public String UserName { get; set; }
+        public String UserFullName { get; set; }
 
         //public Storydto(Story story)
         //{
