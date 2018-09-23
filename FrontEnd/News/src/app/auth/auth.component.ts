@@ -28,8 +28,8 @@ export class AuthComponent implements OnInit {
   ) {
     // use FormBuilder to create a form group
     this.authForm = this.fb.group({
-      'username': ['', Validators.required],
-      'password': ['', Validators.required]
+      'UserName': ['', Validators.required],
+      'Password': ['', Validators.required]
     });
   }
 
@@ -41,8 +41,8 @@ export class AuthComponent implements OnInit {
       this.title = (this.authType === 'login') ? 'Sign in' : 'Sign up';
       // add form control for username if this is the register page
       if (this.authType === 'register') {
-        this.authForm.addControl('email', new FormControl());
-        this.authForm.addControl('fullname', new FormControl());
+        this.authForm.addControl('Email', new FormControl());
+        this.authForm.addControl('FullName', new FormControl());
       }
     });
   }
@@ -65,7 +65,7 @@ export class AuthComponent implements OnInit {
         });
     }
     else{
-      this.userService.userAuthentication(credentials.username,credentials.password).subscribe((data : any)=>{
+      this.userService.userAuthentication(credentials.UserName,credentials.Password).subscribe((data : any)=>{
       this.tokenService.saveToken(data.access_token);
       console.log("Token:" + this.tokenService.getToken());
       //this.userService.getUserClaims();

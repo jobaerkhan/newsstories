@@ -9,13 +9,13 @@
           <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
         </p>
         <div *ngIf="isLoginError" class="red-text center error-message">
-          <i class="material-icons">error</i> Incorrect username or password
+          <i class="ion-information-circled"></i> Incorrect username or password
         </div>
         <form [formGroup]="authForm" (ngSubmit)="submitForm()">
           <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
               <input
-                formControlName="fullname"
+                formControlName="FullName"
                 placeholder="FullName"
                 class="form-control form-control-lg"
                 type="text" 
@@ -23,7 +23,7 @@
             </fieldset>
             <fieldset class="form-group">
               <input
-                formControlName="email"
+                formControlName="Email"
                 placeholder="Email"
                 class="form-control form-control-lg"
                 type="text"
@@ -31,7 +31,7 @@
             </fieldset>
             <fieldset class="form-group">
               <input
-                formControlName="username"
+                formControlName="UserName"
                 placeholder="Username"
                 class="form-control form-control-lg"
                 type="text"
@@ -39,7 +39,7 @@
             </fieldset>
             <fieldset class="form-group">
               <input
-                formControlName="password"
+                formControlName="Password"
                 placeholder="Password"
                 class="form-control form-control-lg"
                 type="password" />

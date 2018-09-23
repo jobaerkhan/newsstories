@@ -3,15 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditorComponent } from './editor.component';
 import { EditableStoryResolver } from './editable-story-resolver.service';
 import { SharedModule } from '../shared';
+import { AuthGuard } from '../core';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditorComponent
+    component: EditorComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: ':id',
+    path: ':Id',
     component: EditorComponent,
+    canActivate: [AuthGuard],
     resolve: {
       story: EditableStoryResolver
     }

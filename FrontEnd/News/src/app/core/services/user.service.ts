@@ -31,11 +31,11 @@ export class UserService {
 
   registerUser(user: User) {
     const body: User = {
-      username: user.username,
-      password: user.password,
-      email: user.email,
-      fullname: user.fullname,
-      token: ''
+      UserName: user.UserName,
+      Password: user.Password,
+      Email: user.Email,
+      FullName: user.FullName,
+      UserId: ''
     }
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
     return this.http.post(`${environment.api_url}`+ '/User/Register', body ,{headers : reqHeader});

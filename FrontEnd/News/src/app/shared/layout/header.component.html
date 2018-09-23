@@ -53,15 +53,19 @@
       </li>
 
       <li class="nav-item">
-        <a (click)="logout()">
-         Logout
+        <a class="nav-link"
+          routerLink="/settings"
+          routerLinkActive="active">
+          <i class="ion-gear-a"></i>&nbsp;Settings
         </a>
       </li>
 
       <li class="nav-item">
-         <p><b> {{ currentUser.UserName }} </b></p>
+        <p class="nav-link"
+          routerLinkActive="active">
+          {{ currentUser.UserName }}
+      </p>
       </li>
-
     </ul>
 
   </div>

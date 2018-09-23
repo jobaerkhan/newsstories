@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'editor',
     loadChildren: './editor/editor.module#EditorModule'
+  },
+  {
+    path: 'settings',
+    loadChildren: './settings/settings.module#SettingsModule'
   }
 ];
 

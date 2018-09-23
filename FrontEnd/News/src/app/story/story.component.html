@@ -2,22 +2,24 @@
 
   <div class="banner">
     <div class="container">
-      <h1>{{ story.title }}</h1>
+      <h1>{{ story.Title }}</h1>
       <app-story-meta [story]="story">
-        <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', story.id]">
-          <i class="ion-edit"></i> Edit Story
-        </a>
+        <span [hidden]="!canModify">
+          <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/editor', story.Id]">
+            <i class="ion-edit"></i> Edit Story
+          </a>
 
-        <button class="btn btn-sm btn-outline-danger" (click)="deleteStory()">
-          <i class="ion-trash-a"></i> Delete Story
-        </button>
+          <button class="btn btn-sm btn-outline-danger" [ngClass]="{disabled: isDeleting}" (click)="deleteStory()">
+            <i class="ion-trash-a"></i> Delete Story
+          </button>
+        </span>
       </app-story-meta>
     </div>
   </div>
   <div class="container page">
     <div class="row article-content">
       <div class="col-md-12">
-        <div [innerHTML]="story.body"></div>
+        <div [innerHTML]="story.Body"></div>
       </div>
     </div>
   </div>

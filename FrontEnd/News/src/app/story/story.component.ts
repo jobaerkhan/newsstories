@@ -5,7 +5,9 @@ import { ToastrService } from 'ngx-toastr'
 
 import {
   Story,
-  StoriesService
+  StoriesService,
+  User,
+  UserService
 } from '../core';
 
 @Component({
@@ -14,12 +16,16 @@ import {
 })
 export class StoryComponent implements OnInit {
   story: Story;
+  currentUser: User;
+  canModify: boolean;
+  isDeleting = false;
 
   constructor(
     private route: ActivatedRoute,
     private storyService: StoriesService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -28,11 +34,20 @@ export class StoryComponent implements OnInit {
         this.story = data.story;
       }
     );
+
+    // Load the current user's data
+    this.userService.currentUser.subscribe(
+      (userData: User) => {
+        this.currentUser = userData;
+
+        this.canModify = (this.currentUser.UserId === this.story.UserId);
+      }
+    );
   }
 
   deleteStory() {
-
-    this.storyService.delete(this.story.id)
+    this.isDeleting = true;
+    this.storyService.delete(this.story.Id)
       .subscribe(
         success => {
           if (success) {
