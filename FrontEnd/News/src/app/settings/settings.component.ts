@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { User, UserService } from '../core';
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-settings-page',
@@ -13,11 +13,13 @@ export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
   errors: Object = {};
   isSubmitting = false;
+  isUpdateError: boolean = false;
 
   constructor(
     private router: Router,
     private userService: UserService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.settingsForm = this.fb.group({
       UserName: '',
@@ -45,14 +47,15 @@ export class SettingsComponent implements OnInit {
     this.updateUser(this.settingsForm.value);
 
     this.userService
-    .update(this.user)
-    .subscribe(
-      updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.UserName),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
-      }
-    );
+      .update(this.user)
+      .subscribe((data: any) => {
+        if (data.Succeeded == true) {
+          this.router.navigateByUrl('/'),
+            this.toastr.success('User settings updated successfully');
+        }
+        else
+          this.toastr.error(data.Errors[0]);
+      });
   }
 
   updateUser(values: Object) {

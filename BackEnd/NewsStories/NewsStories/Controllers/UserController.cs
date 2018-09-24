@@ -44,5 +44,26 @@ namespace NewsStories.Controllers
             };
             return model;
         }
+
+        [HttpPut]
+        [Authorize]
+        [Route("api/user")]
+        public IdentityResult UpdateUser(UserModel model)
+        {
+            var userStore = new UserStore<User>(new NewsDbContext());
+            var manager = new UserManager<User>(userStore);
+            var user = manager.FindById(model.UserId);
+            user.FullName = model.FullName;
+            user.Email = model.Email;
+            user.PasswordHash = manager.PasswordHasher.HashPassword(model.Password);
+            IdentityResult result = manager.Update(user);
+
+            if (!result.Succeeded)
+            {
+                //throw exception......
+            }
+
+            return result;
+        }
     }
 }

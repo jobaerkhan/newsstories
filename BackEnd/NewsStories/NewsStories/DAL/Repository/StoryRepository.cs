@@ -31,7 +31,7 @@ namespace NewsStories.DAL.Repository
 
         public override IEnumerable<Story> GetAll()
         {
-            return db.Set<Story>().Include("User").ToList();
+            return db.Set<Story>().Include("User").ToList().OrderByDescending(d => Convert.ToDateTime(d.PublishedDate));
         }
     }
 }

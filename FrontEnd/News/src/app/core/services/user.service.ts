@@ -69,8 +69,6 @@ export class UserService {
   }
 
   setAuth(user: User) {
-    // Save token sent from server in localstorage
-    //this.tokenService.saveToken(user.token);
     // Set current user data into observable
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
@@ -86,20 +84,6 @@ export class UserService {
     this.isAuthenticatedSubject.next(false);
   }
 
-  attemptAuth(type, credentials): Observable<any> {
-    
-    const route = (type === 'login') ? '/login' : '';
-    return this.apiService.post('/users' + route, {user: credentials})
-      .pipe(map(
-      data => {
-        this.setAuth(data.user);
-        return data;
-      }
-    ));
-    // //const route = (type === 'login') ? '/login' : '';
-    // return this.http.post('http://localhost:57915/login', 'username=jobaer&password=hello&grant_type=password');
-  }
-
   getCurrentUser(): User {
     return this.currentUserSubject.value;
   }
@@ -107,10 +91,10 @@ export class UserService {
   // Update the user on the server (email, pass, etc)
   update(user): Observable<User> {
     return this.apiService
-    .put('/user', { user })
+    .put('/user', user)
     .pipe(map(data => {
-      this.currentUserSubject.next(data.user);
-      return data.user;
+      this.currentUserSubject.next(user);
+      return data;
     }));
   }
 

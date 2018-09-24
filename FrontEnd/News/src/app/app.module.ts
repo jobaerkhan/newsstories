@@ -22,7 +22,11 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     AppRoutingModule,
     HomeModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     BrowserAnimationsModule
   ],
   providers: [],
