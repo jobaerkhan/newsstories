@@ -65,11 +65,13 @@ export class AuthComponent implements OnInit {
         });
     }
     else{
-      this.userService.userAuthentication(credentials.UserName,credentials.Password).subscribe((data : any)=>{
+      this.userService.userAuthentication(credentials.UserName,credentials.Password).subscribe((data : any)=>
+      {
       this.tokenService.saveToken(data.access_token);
       console.log("Token:" + this.tokenService.getToken());
       //this.userService.getUserClaims();
       this.router.navigateByUrl('/');
+      this.userService.populate();
     },
     (err : HttpErrorResponse)=>{
       this.isLoginError = true;

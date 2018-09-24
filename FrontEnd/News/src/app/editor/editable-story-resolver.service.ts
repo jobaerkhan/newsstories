@@ -17,7 +17,7 @@ export class EditableStoryResolver implements Resolve<Story> {
     state: RouterStateSnapshot
   ): Observable<any> {
 
-    return this.storiesService.get(route.params['id'])
+    return this.storiesService.get(route.params['Id'])
       .pipe(
         map(
           story => {

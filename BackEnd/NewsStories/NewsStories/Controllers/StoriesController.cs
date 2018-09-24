@@ -72,8 +72,19 @@ namespace NewsStories.Controllers
             if (story == null)
             {
                 return NotFound();
-            } 
-            return Ok(new { story = story });
+            }
+            var user = db.User.GetUser(story.UserId);
+            var storydto = new Storydto()
+                {
+                    Id = story.Id,
+                    Title = story.Title,
+                    Body = story.Body,
+                    PublishedDate = story.PublishedDate,
+                    UserId = story.User.Id,
+                    UserFullName = user.FullName
+                };
+           
+            return Ok(new { story = storydto });
         }
 
         // PUT: api/Stories/5
@@ -93,6 +104,8 @@ namespace NewsStories.Controllers
             {
                 Story updatedStory = Mapper.Map<Story>(story);
                 updatedStory.PublishedDate = DateTime.Now;
+                var user = db.User.GetUser(story.UserId);
+                updatedStory.User = db.User.GetUser(story.UserId);
                 db.Story.Update(updatedStory);
                 db.SaveChanges();
                 return Ok(new { success = true });

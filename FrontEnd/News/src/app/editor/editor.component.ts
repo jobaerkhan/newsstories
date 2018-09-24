@@ -22,9 +22,8 @@ export class EditorComponent implements OnInit {
   ) {
 
     this.storyForm = this.fb.group({
-      title: ['', Validators.required],
-      body: ['', Validators.required],
-      id: 0
+      Title: ['', Validators.required],
+      Body: ['', Validators.required]
     });
   }
 
