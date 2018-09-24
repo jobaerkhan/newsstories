@@ -34,10 +34,11 @@
               <input class="form-control form-control-lg"
                 type="password"
                 placeholder="New Password"
-                formControlName="Password" />
+                formControlName="Password"
+                [(ngModel)]='password' />
             </fieldset>
 
-            <button class="btn btn-lg btn-primary pull-xs-right"
+            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!password"
               type="submit">
               Update Settings
             </button>

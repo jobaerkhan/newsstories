@@ -5,7 +5,7 @@
   
           <form [formGroup]="storyForm">
             <fieldset>
-              <span style='color: red' *ngIf="storyForm.get('Title').hasError('required') && storyForm.get('Title').touched">
+              <span class="ion-information-circled" style='color: red' *ngIf="storyForm.get('Title').hasError('required') && storyForm.get('Title').touched">
                     Please enter title for your story
               </span> 
               <fieldset class="form-group">
@@ -15,7 +15,7 @@
                   placeholder="Enter the title of your story"
                   required  />
               </fieldset>
-              <span style='color: red' *ngIf="storyForm.get('Body').hasError('required') && storyForm.get('Body').touched">
+              <span class="ion-information-circled" style='color: red' *ngIf="storyForm.get('Body').hasError('required') && storyForm.get('Body').touched">
                   Please write your story
             </span> 
               <fieldset class="form-group">

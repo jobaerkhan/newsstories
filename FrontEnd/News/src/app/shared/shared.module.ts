@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { StoryListComponent, StoryMetaComponent, StoryPreviewComponent } from './story-helpers';
-import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { ShowAuthedDirective } from './show-authed.directive';
     StoryListComponent,
     StoryMetaComponent,
     StoryPreviewComponent,
-    ListErrorsComponent,
     ShowAuthedDirective
   ],
   exports: [

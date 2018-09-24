@@ -15,8 +15,8 @@ export class AuthComponent implements OnInit {
   title: String = '';
   errors: Errors = { errors: {} };
   isSubmitting = false;
+  isLoginError = false;
   authForm: FormGroup;
-  isLoginError : boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,6 +62,7 @@ export class AuthComponent implements OnInit {
           }
           else
             this.toastr.error(data.Errors[0]);
+            this.isSubmitting = false;
         });
     }
     else{
@@ -74,6 +75,7 @@ export class AuthComponent implements OnInit {
       this.userService.populate();
     },
     (err : HttpErrorResponse)=>{
+      this.isSubmitting = false;
       this.isLoginError = true;
     });
     }

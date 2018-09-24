@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../core';
+import { UserService, StoryFilter } from '../core';
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +12,13 @@ export class HomeComponent implements OnInit {
     private userService: UserService
   ) {}
 
+  listConfig: StoryFilter = {
+  };
+
   ngOnInit() {
-    //this.userService.populate();
+    this.listConfig = { 
+      pagesize : 10,
+      page : 0
+    };
   }
 }

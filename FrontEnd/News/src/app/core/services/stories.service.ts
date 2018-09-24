@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { HttpParams } from '@angular/common/http';
 import * as xml2js from 'xml2js';
 
 import { ApiService } from './api.service';
-import { Story } from '../models/story.model';
+import { Story, StoryFilter} from '../models';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -13,9 +13,18 @@ export class StoriesService {
     private apiService: ApiService
   ) {}
 
-  query(): Observable<{stories: Story[], storiesCount: number}> {
+  query(query : StoryFilter): Observable<{stories: Story[], storiesCount: number}> {
+    // Convert any filters over to Angular's URLSearchParams
+    const params = {};
+    Object.keys(query)
+    .forEach((key) => {
+      params[key] = query[key];
+    });
     return this.apiService
-    .get('/stories');
+    .get(
+      '/stories',
+      new HttpParams({ fromObject: params })
+    );
   }
   
   getStories() : Observable<{stories: Story[]}> {

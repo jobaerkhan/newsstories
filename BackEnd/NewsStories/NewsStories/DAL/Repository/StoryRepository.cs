@@ -23,15 +23,16 @@ namespace NewsStories.DAL.Repository
 
         }
 
-        public bool StoryExists(int id)
-        {
-            return context.Story.Count(e => e.Id == id) > 0;
-        }
-
-
         public override IEnumerable<Story> GetAll()
         {
             return db.Set<Story>().Include("User").ToList().OrderByDescending(d => Convert.ToDateTime(d.PublishedDate));
+        }
+
+        public IQueryable<Story> GetAllStories()
+        {
+            return db.Story
+                .Include("User")
+                .AsQueryable();
         }
     }
 }

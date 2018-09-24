@@ -50,20 +50,21 @@ namespace NewsStories.Controllers
         [Route("api/user")]
         public IdentityResult UpdateUser(UserModel model)
         {
-            var userStore = new UserStore<User>(new NewsDbContext());
-            var manager = new UserManager<User>(userStore);
-            var user = manager.FindById(model.UserId);
-            user.FullName = model.FullName;
-            user.Email = model.Email;
-            user.PasswordHash = manager.PasswordHasher.HashPassword(model.Password);
-            IdentityResult result = manager.Update(user);
-
-            if (!result.Succeeded)
+            try
             {
-                //throw exception......
+                var userStore = new UserStore<User>(new NewsDbContext());
+                var manager = new UserManager<User>(userStore);
+                var user = manager.FindById(model.UserId);
+                user.FullName = model.FullName;
+                user.Email = model.Email;
+                user.PasswordHash = manager.PasswordHasher.HashPassword(model.Password);
+                IdentityResult result = manager.Update(user);
+                return result;
             }
-
-            return result;
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

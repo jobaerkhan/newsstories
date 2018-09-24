@@ -47,20 +47,12 @@ export class UserService {
     return this.http.post(`${environment.token_url}` + '/token', data, { headers: reqHeader });
   }
 
-  getUserClaims(){
-     this.apiService.get('/GetUserClaims').subscribe((data: any) => {
-      //this.userClaims = data;
-      this.setAuth(data);
-    });
-   }
-
   populate() {
     // If token detected, attempt to get & store user's info
     //this.purgeAuth();
     if (this.tokenService.getToken()) {
       this.apiService.get('/GetUserClaims')
       .subscribe((data: any) => {
-        //this.userClaims = data;
         this.setAuth(data);
       });
     } else {

@@ -55,6 +55,7 @@ export class SettingsComponent implements OnInit {
         }
         else
           this.toastr.error(data.Errors[0]);
+          this.isSubmitting = false;
       });
   }
 

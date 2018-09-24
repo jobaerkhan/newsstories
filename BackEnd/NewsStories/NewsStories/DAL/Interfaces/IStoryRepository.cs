@@ -8,6 +8,6 @@ namespace NewsStories.DAL.Interfaces
 {
     public interface IStoryRepository : IRepository<Story>
     {
-        bool StoryExists(int id);
+        IQueryable<Story> GetAllStories();
     }
 }

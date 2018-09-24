@@ -31,30 +31,59 @@ namespace NewsStories.Controllers
 
         //GET: api/Stories
         [AllowAnonymous]
-        public IHttpActionResult GetStory()
+        public IHttpActionResult GetStory( [FromUri] QueryParameters query)
         {
-            var data = db.Story.GetAll();
-            if (data == null)
+            IQueryable<Story> storyQuery;
+            storyQuery = db.Story.GetAllStories().OrderByDescending(s => s.PublishedDate);
+            var totalCount = storyQuery.Count();
+            var results = storyQuery
+                .Skip(query.pageSize * query.page)
+                .Take(query.pageSize)
+                .ToList()
+                .Select(s => new Storydto()
+                {
+                    Id = s.Id,
+                    Title = s.Title,
+                    Body = s.Body,
+                    PublishedDate = s.PublishedDate,
+                    UserId = s.User.Id,
+                    UserFullName = s.User.FullName
+                });
+
+            return Ok(new
             {
-                return NotFound();
-            }
-
-             var stories = from s in data
-                           select new Storydto()
-                    {
-                        Id = s.Id,
-                        Title = s.Title,
-                        Body = s.Body,
-                        PublishedDate = s.PublishedDate,
-                        UserId = s.User.Id,
-                        UserFullName = s.User.FullName
-                    };
-
-            return Ok(new { stories = stories });
+                storiesCount = totalCount,
+                stories = results
+            });
         }
+
+        ////GET: api/Stories
+        //[AllowAnonymous]
+        //public IHttpActionResult GetStory()
+        //{
+        //    var data = db.Story.GetAll();
+        //    if (data == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //     var stories = from s in data
+        //                   select new Storydto()
+        //            {
+        //                Id = s.Id,
+        //                Title = s.Title,
+        //                Body = s.Body,
+        //                PublishedDate = s.PublishedDate,
+        //                UserId = s.User.Id,
+        //                UserFullName = s.User.FullName
+        //            };
+
+        //    return Ok(new { stories = stories });
+        //}
 
         //For xml or json data
         [Route("api/GetStories")]
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Story> GetStories()
         {
@@ -75,15 +104,15 @@ namespace NewsStories.Controllers
             }
             var user = db.User.GetUser(story.UserId);
             var storydto = new Storydto()
-                {
-                    Id = story.Id,
-                    Title = story.Title,
-                    Body = story.Body,
-                    PublishedDate = story.PublishedDate,
-                    UserId = story.User.Id,
-                    UserFullName = user.FullName
-                };
-           
+            {
+                Id = story.Id,
+                Title = story.Title,
+                Body = story.Body,
+                PublishedDate = story.PublishedDate,
+                UserId = story.User.Id,
+                UserFullName = user.FullName
+            };
+
             return Ok(new { story = storydto });
         }
 
@@ -130,7 +159,7 @@ namespace NewsStories.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             try
             {
                 var identityClaims = (ClaimsIdentity)User.Identity;

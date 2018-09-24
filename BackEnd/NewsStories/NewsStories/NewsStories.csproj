@@ -258,7 +258,7 @@
       <DependentUpon>201809222024164_userIdentityAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\PostViewModel.cs" />
+    <Compile Include="Models\QueryParameters.cs" />
     <Compile Include="Models\Storydto.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Startup.cs" />
