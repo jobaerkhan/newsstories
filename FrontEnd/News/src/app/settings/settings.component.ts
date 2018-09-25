@@ -23,7 +23,7 @@ export class SettingsComponent implements OnInit {
   ) {
     this.settingsForm = this.fb.group({
       UserName: '',
-      FullName: '',
+      FullName: ['', [Validators.required, Validators.minLength(4)]],
       Email: ['', [Validators.required, Validators.email]],
       Password: ['', [Validators.required, Validators.minLength(6)]]
     });

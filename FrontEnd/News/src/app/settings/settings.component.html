@@ -6,17 +6,23 @@
         <h1 class="text-xs-center">Your Settings</h1>
 
         <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-             
-            
+
+
           <fieldset [disabled]="isSubmitting">
+              <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.controls.FullName.errors?.required && settingsForm.controls.FullName.touched">
+                  Your full name is required
+              </span>
+              <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.controls.FullName.errors?.minlength && settingsForm.controls.FullName.touched">
+                  Full Name must be at least 4 characters
+              </span>
             <fieldset class="form-group">
               <input class="form-control form-control-lg" type="text" placeholder="FullName" formControlName="FullName" />
             </fieldset>
-            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Email').hasError('email') && settingsForm.get('Email').touched">
-                Email must be a valid email address
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.controls.Email.errors?.email && settingsForm.controls.Email.touched">
+              Email must be a valid email address
             </span>
-            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Email').hasError('required') && settingsForm.get('Email').touched">
-                Email is required
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.controls.Email.errors?.required && settingsForm.controls.Email.touched">
+              Email is required
             </span>
             <fieldset class="form-group">
               <input class="form-control form-control-lg" type="email" placeholder="Email" formControlName="Email" />
@@ -26,11 +32,11 @@
               <input class="form-control form-control-lg" type="text" disabled="true" placeholder="Username" formControlName="UserName"
               />
             </fieldset>
-            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Password').hasError('required') && settingsForm.get('Password').touched">
-                Password is required
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.controls.Password.errors?.required && settingsForm.controls.Password.touched">
+              Password is required
             </span>
-            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Password').hasError('minlength') && settingsForm.get('Password').touched">
-                Password must be at least 6 characters
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.controls.Password.errors?.minlength && settingsForm.controls.Password.touched">
+              Password must be at least 6 characters
             </span>
             <fieldset class="form-group">
               <input class="form-control form-control-lg" type="password" placeholder="New Password" formControlName="Password" />

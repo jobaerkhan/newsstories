@@ -13,10 +13,10 @@
         </div>
         <form [formGroup]="authForm" (ngSubmit)="submitForm()">
           <fieldset [disabled]="isSubmitting">
-              <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('FullName').hasError('required') && authForm.get('FullName').touched">
+              <span class="ion-information-circled" style='color: red' *ngIf="authType == 'register' && authForm.controls.FullName.errors?.required && authForm.controls.FullName.touched">
                   Your full name is required
               </span>
-              <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('FullName').hasError('minlength') && authForm.get('FullName').touched">
+              <span class="ion-information-circled" style='color: red' *ngIf="authType == 'register' && authForm.controls.FullName.errors?.minlength && authForm.controls.FullName.touched">
                   Full Name must be at least 4 characters
               </span>
             <fieldset class="form-group">
@@ -27,10 +27,10 @@
                 type="text" 
                 *ngIf="authType == 'register'" />
             </fieldset>
-            <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('Email').hasError('email') && authForm.get('Email').touched">
+            <span class="ion-information-circled" style='color: red' *ngIf="authType == 'register' && authForm.controls.Email.errors?.email && authForm.controls.Email.touched">
                 Email must be a valid email address
             </span>
-            <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('Email').hasError('required') && authForm.get('Email').touched">
+            <span class="ion-information-circled" style='color: red' *ngIf="authType == 'register' && authForm.controls.Email.errors?.required && authForm.controls.Email.touched">
                 Email is required
             </span>
             <fieldset class="form-group">
