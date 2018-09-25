@@ -24,7 +24,6 @@ namespace NewsStories.Controllers
             var manager = new UserManager<User>(userStore);
             var user = new User() { UserName = model.UserName, Email = model.Email, FullName = model.FullName };
             IdentityResult result = manager.Create(user, model.Password);
-
             return result;
         }
 
