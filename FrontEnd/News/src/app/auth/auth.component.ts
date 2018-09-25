@@ -41,8 +41,8 @@ export class AuthComponent implements OnInit {
       this.title = (this.authType === 'login') ? 'Sign in' : 'Sign up';
       // add form control for username if this is the register page
       if (this.authType === 'register') {
-        this.authForm.addControl('Email', new FormControl());
-        this.authForm.addControl('FullName', new FormControl());
+        this.authForm.addControl('Email' , new FormControl('', [Validators.required, Validators.email]));
+        this.authForm.addControl('FullName', new FormControl('', [Validators.required, Validators.minLength(4)]));
       }
     });
   }
@@ -69,8 +69,7 @@ export class AuthComponent implements OnInit {
       this.userService.userAuthentication(credentials.UserName,credentials.Password).subscribe((data : any)=>
       {
       this.tokenService.saveToken(data.access_token);
-      console.log("Token:" + this.tokenService.getToken());
-      //this.userService.getUserClaims();
+      //console.log("Token:" + this.tokenService.getToken());
       this.router.navigateByUrl('/');
       this.userService.populate();
     },

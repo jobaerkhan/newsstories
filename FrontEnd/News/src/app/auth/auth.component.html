@@ -8,25 +8,37 @@
           <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
           <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
         </p>
-        <div *ngIf="isLoginError" class="red-text">
+        <div *ngIf="isLoginError" style='color: red' >
           <i class="ion-information-circled"></i> Incorrect username or password
         </div>
         <form [formGroup]="authForm" (ngSubmit)="submitForm()">
           <fieldset [disabled]="isSubmitting">
+              <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('FullName').hasError('required') && authForm.get('FullName').touched">
+                  Your full name is required
+              </span>
+              <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('FullName').hasError('minlength') && authForm.get('FullName').touched">
+                  Full Name must be at least 4 characters
+              </span>
             <fieldset class="form-group">
               <input
                 formControlName="FullName"
-                placeholder="FullName"
+                placeholder="Your Full Name"
                 class="form-control form-control-lg"
                 type="text" 
                 *ngIf="authType == 'register'" />
             </fieldset>
+            <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('Email').hasError('email') && authForm.get('Email').touched">
+                Email must be a valid email address
+            </span>
+            <span class="ion-information-circled" style='color: red' *ngIf="authForm.get('Email').hasError('required') && authForm.get('Email').touched">
+                Email is required
+            </span>
             <fieldset class="form-group">
               <input
                 formControlName="Email"
                 placeholder="Email"
                 class="form-control form-control-lg"
-                type="text"
+                type="email"
                 *ngIf="authType == 'register'" />
             </fieldset>
             <fieldset class="form-group">

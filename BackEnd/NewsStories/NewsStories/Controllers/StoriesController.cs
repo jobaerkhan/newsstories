@@ -117,6 +117,7 @@ namespace NewsStories.Controllers
         }
 
         // PUT: api/Stories/5
+        [Authorize]
         public IHttpActionResult PutStory(int id, [FromBody]Storydto story)
         {
             if (!ModelState.IsValid)
@@ -147,6 +148,7 @@ namespace NewsStories.Controllers
         }
 
         // POST: api/Stories
+        [Authorize]
         public IHttpActionResult PostStory([FromBody]Storydto story)
         {
             if (story == null)
@@ -181,6 +183,7 @@ namespace NewsStories.Controllers
 
         // DELETE: api/Stories/5
         [ResponseType(typeof(Story))]
+        [Authorize]
         public IHttpActionResult DeleteStory(int id)
         {
             Story story = db.Story.GetByID(id);

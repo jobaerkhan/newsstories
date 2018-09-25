@@ -6,40 +6,37 @@
         <h1 class="text-xs-center">Your Settings</h1>
 
         <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+             
+            
           <fieldset [disabled]="isSubmitting">
-
             <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="text"
-                placeholder="FullName"
-                formControlName="FullName" />
+              <input class="form-control form-control-lg" type="text" placeholder="FullName" formControlName="FullName" />
+            </fieldset>
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Email').hasError('email') && settingsForm.get('Email').touched">
+                Email must be a valid email address
+            </span>
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Email').hasError('required') && settingsForm.get('Email').touched">
+                Email is required
+            </span>
+            <fieldset class="form-group">
+              <input class="form-control form-control-lg" type="email" placeholder="Email" formControlName="Email" />
             </fieldset>
 
             <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="email"
-                placeholder="Email"
-                formControlName="Email" />
+              <input class="form-control form-control-lg" type="text" disabled="true" placeholder="Username" formControlName="UserName"
+              />
             </fieldset>
-
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Password').hasError('required') && settingsForm.get('Password').touched">
+                Password is required
+            </span>
+            <span class="ion-information-circled" style='color: red' *ngIf="settingsForm.get('Password').hasError('minlength') && settingsForm.get('Password').touched">
+                Password must be at least 6 characters
+            </span>
             <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="text"
-                disabled="true"
-                placeholder="Username"
-                formControlName="UserName" />
+              <input class="form-control form-control-lg" type="password" placeholder="New Password" formControlName="Password" />
             </fieldset>
 
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="password"
-                placeholder="New Password"
-                formControlName="Password"
-                [(ngModel)]='password' />
-            </fieldset>
-
-            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!password"
-              type="submit">
+            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!settingsForm.valid" type="submit">
               Update Settings
             </button>
 
@@ -49,8 +46,7 @@
         <!-- Line break for logout button -->
         <hr />
 
-        <button class="btn btn-outline-danger"
-          (click)="logout()">
+        <button class="btn btn-outline-danger" (click)="logout()">
           Or click here to logout.
         </button>
 

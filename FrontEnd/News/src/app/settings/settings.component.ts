@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User, UserService } from '../core';
 import { ToastrService } from 'ngx-toastr'
@@ -24,8 +24,8 @@ export class SettingsComponent implements OnInit {
     this.settingsForm = this.fb.group({
       UserName: '',
       FullName: '',
-      Email: '',
-      Password: ''
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
   }
