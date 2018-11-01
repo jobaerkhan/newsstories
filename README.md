@@ -1,8 +1,8 @@
 # NewsStories
 
-Assignment from Cefalo
+A simple blog application with Asp.net web api and Angular 6
 
-All the phases has been successfully completed.
+I have followed https://github.com/gothinkster/angular-realworld-example-app for frontend
 
 In this project I have used:
 ASP.Net Web API
@@ -27,7 +27,5 @@ Steps to run this project:
 
 Now you are good to browse the site http://localhost:4200 
 On seed I have created a user with userName: jobaer and password: jobaer
-
-:)
 
 
